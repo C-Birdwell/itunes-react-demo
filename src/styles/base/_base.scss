@@ -1,10 +1,85 @@
+@import 'settings';
+
 html {
   font-size: 62.5%;
+  overflow-y: scroll;
 }
 
 body {
+  flex: 1;
+  flex-direction: column;
   font-family: Helvetica, Arial, sans-serif;
   font-size: $m-size;
+  min-height: 100vh;
+  width: 100%;
+  & * {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+}
+
+.content-container {
+  overflow: hidden;
+  padding: 0 0 20px 0;
+}
+
+nav {
+  margin: 0 0 40px 0;
+}
+
+#app {
+  width: 100%;
+}
+
+.row {
+  flex-direction: row;
+}
+
+@for $i from 1 through 100 {
+  .col-#{$i} {
+    flex: $i;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  flex: 0;
+}
+
+.card {
+  &-container {
+    flex: 1;
+    background-color: rgba(#000, 0.75);
+    border: 2px solid $silver;
+    border-radius: 5px;
+    padding: 20px 1%;
+    width: 100%;
+    margin: 0 0.5%;
+    transition: all 1s;
+    text-align: center;
+    color: #fff;
+
+    -webkit-box-shadow: 2px 16px 20px -12px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 16px 20px -12px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 16px 20px -12px rgba(0, 0, 0, 0.75);
+    & img {
+      max-width: 100%;
+      align-self: center;
+      height: inherit;
+      max-height: 100px;
+    }
+    & p {
+      color: #fff;
+    }
+  }
 }
 
 button {
@@ -17,4 +92,33 @@ button:disabled {
 
 .is-active {
   font-weight: bold;
+}
+
+.loading {
+  &-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    max-width: 350px;
+    max-height: 350px;
+    align-self: center;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid $silver;
+    top: 30%;
+    border-radius: 25px;
+    & svg {
+      align-self: center;
+    }
+  }
+}
+
+.card-row {
+  margin: 20px 0 0 0;
+}
+
+.empty-card {
+  padding: 20px 1%;
+  width: 100%;
+  margin: 0 0.5%;
 }

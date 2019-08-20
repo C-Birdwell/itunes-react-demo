@@ -1,8 +1,8 @@
-# React Enviroment
+# iTunes React Deom
 
 # Description
 
-Custom React enviroment that includes node-server, SaSS support, Redux, Jest, live browser detection, and formatting support.
+Small demo for searching the iTunes api and saving items in localStorage tokens. The project includes React, Redux, Axios,
 
 # Setup
 
@@ -17,4 +17,3 @@ Custom React enviroment that includes node-server, SaSS support, Redux, Jest, li
 1. yarn build:dev - build for development (produced files are located in public/dist folder)
 2. yarn build:prod - build for production (produced files are located in public/dist folder)
 3. yarn destroy - removes dist folder
-4. yarn test - Run Jest

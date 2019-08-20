@@ -3,26 +3,23 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import LazyLoad from 'react-lazyload'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-import SearchBar from './SearchBar'
+import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import Fade from 'react-reveal/Fade'
-import LoadingGraphic from '../components/LoadingGraphic'
 
 import { _onResponseArray, _onAddNewFavorite, _onRetreiveSavedFavorites } from '../actions'
 
-//For Retrieving saved items
-const getSavedItems = JSON.parse(localStorage.getItem('savedArray'))
-
-export class DashboardPage extends React.Component {
+export class FavoritesPage extends React.Component {
   constructor(...props) {
     super(...props)
-    this._onSelectFavorite = this._onSelectFavorite.bind(this)
+    this._onDeleteFavorite = this._onDeleteFavorite.bind(this)
   }
 
   componentDidMount() {
     const { _onRetreiveSavedFavorites } = this.props
     //localStorage.clear()
     //For Retrieving saved items
+    const getSavedItems = JSON.parse(localStorage.getItem('savedArray'))
+
     _onRetreiveSavedFavorites(getSavedItems === null ? [] : getSavedItems)
   }
 
@@ -30,14 +27,13 @@ export class DashboardPage extends React.Component {
     const { savedAddItem } = this.props
   }
 
-  _onSelectFavorite(card) {
+  _onDeleteFavorite(card) {
     const { _onAddNewFavorite, savedArray, _onRetreiveSavedFavorites } = this.props
     let newArray = savedArray
-    newArray.push(card)
+    newArray = newArray.filter(val => val !== card)
     const format = JSON.stringify(newArray)
     localStorage.setItem('savedArray', format)
     _onRetreiveSavedFavorites(newArray)
-    _onAddNewFavorite(card)
   }
 
   renderEmptyColumns(val) {
@@ -50,12 +46,12 @@ export class DashboardPage extends React.Component {
   }
 
   renderCard() {
-    const { responseArray, responseChunk } = this.props
+    const { savedChunk, savedArray } = this.props
 
-    if (responseArray) {
+    if (savedArray) {
       return (
         <div>
-          {responseChunk.map((block, i) => {
+          {savedChunk.map((block, i) => {
             const delayRow = i * 10
             return (
               <div className="row card-row" key={i}>
@@ -63,10 +59,10 @@ export class DashboardPage extends React.Component {
                   <Fade
                     bottom
                     duration={1250}
-                    key={i + card.trackName + responseArray.length}
+                    key={i + card.trackName + savedArray.length}
                     delay={i * 100 + delayRow}
                   >
-                    <div key={i} className="card-container">
+                    <div className="card-container">
                       <div className="col-2">
                         <div className="col-2">
                           <LazyLoad>
@@ -74,11 +70,7 @@ export class DashboardPage extends React.Component {
                           </LazyLoad>
                         </div>
                         <div className="col-1">
-                          <p>
-                            {card.trackName && card.trackName.length > 30
-                              ? `${card.trackName.slice(0, 30)}...`
-                              : card.trackName}
-                          </p>
+                          <p>{card.trackName}</p>
                         </div>
                       </div>
                       <div className="col-2">
@@ -88,14 +80,13 @@ export class DashboardPage extends React.Component {
                         </a>
                       </div>
                       <div className="col-1">
-                        <div className="button-plus" onClick={() => this._onSelectFavorite(card)}>
-                          <FontAwesomeIcon icon={faPlusCircle} />
+                        <div className="button-delete" onClick={() => this._onDeleteFavorite(card)}>
+                          <FontAwesomeIcon icon={faMinusCircle} />
                         </div>
                       </div>
                     </div>
                   </Fade>
                 ))}
-
                 {block.length < 5 && this.renderEmptyColumns(block.length).map(blank => blank)}
               </div>
             )
@@ -109,27 +100,15 @@ export class DashboardPage extends React.Component {
 
   render() {
     const { loading } = this.props
-    return (
-      <div className="content-container">
-        <div className="search-container">
-          <SearchBar />
-        </div>
-        <div className="row">
-          <div className="col-1" style={{ position: 'relative' }}>
-            {this.renderCard()}
-          </div>
-        </div>
-      </div>
-    )
+    return <div className="content-container">{this.renderCard()}</div>
   }
 }
 
 const mapStateToProps = state => ({
   loading: state.response.loading,
-  responseArray: state.response.responseArray,
-  responseChunk: state.response.responseChunk,
   savedAddItem: state.favorite.savedAddItem,
   savedArray: state.favorite.savedArray,
+  savedChunk: state.favorite.savedChunk,
 })
 
 function mapDispatchToProps(dispatch) {
@@ -146,4 +125,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(DashboardPage)
+)(FavoritesPage)

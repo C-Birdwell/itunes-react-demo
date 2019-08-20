@@ -1,0 +1,7 @@
+export const RESPONSE_ARRAY = 'response_array'
+export const QUERY_STRING = 'query_string'
+export const QUERY_CATEGORY = 'query_category'
+export const LOADING = 'loading'
+export const SAVED_ITEMS = 'saved_items'
+export const SAVED_ITEMS_NEW = 'saved_items_new'
+export const SAVED_ITEMS_DELETE = 'saved_items_delete'

@@ -1,12 +1,11 @@
-import React from "react";
-import { BrowserRouter, Route, Switch, Link, NavLink } from "react-router-dom";
-import DashboardPage from "../components/DashboardPage";
-import ExpenseDashboardPage from "../components/ExpenseDashboardPage";
-import AddExpensePage from "../components/AddExpensePage";
-import EditExpensePage from "../components/EditExpensePage";
-import HelpPage from "../components/HelpPage";
-import NotFoundPage from "../components/NotFoundPage";
-import Header from "../components/Header";
+import React from 'react'
+import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom'
+import DashboardPage from '../components/DashboardPage'
+import FavoritesPage from '../components/FavoritesPage'
+
+import NotFoundPage from '../components/NotFoundPage'
+import Header from '../components/Header'
+import LoadingGraphic from '../components/LoadingGraphic'
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -14,14 +13,12 @@ const AppRouter = () => (
       <Header />
       <Switch>
         <Route path="/" component={DashboardPage} exact={true} />
-        <Route path="/expensedash" component={ExpenseDashboardPage} />
-        <Route path="/create" component={AddExpensePage} />
-        <Route path="/edit/:id" component={EditExpensePage} />
-        <Route path="/help" component={HelpPage} />
+        <Route path="/favorites" component={FavoritesPage} />
         <Route component={NotFoundPage} />
       </Switch>
+      <LoadingGraphic />
     </div>
   </BrowserRouter>
-);
+)
 
-export default AppRouter;
+export default AppRouter
