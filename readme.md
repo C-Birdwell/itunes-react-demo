@@ -1,12 +1,12 @@
-# iTunes React Deom
+# iTunes React Demo
 
 # Description
 
-Small demo for searching the iTunes api and saving items in localStorage tokens. The project includes React, Redux, Axios,
+Small demo for searching the iTunes api and saving items in localStorage tokens. The project includes React, SaSS, React Router DOM, Redux, and Axios.
 
 # Setup
 
-1. git clone https://github.com/C-Birdwell/React-Enviroment.git - install project
+1. git clone https://github.com/C-Birdwell/itunes-react-demo.git - install project
 2. yarn install - install node dependencies
 3. Setup server for devolopment
    1. yarn start - starts node server (keep this running in a seperate terminal window)
