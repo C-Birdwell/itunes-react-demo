@@ -31,7 +31,7 @@
     "global": "^4.3.2",
     "globally": "^0.0.0",
     "moment": "^2.24.0",
-    "node-sass": "^4.8.3",
+    "node-sass": "^4.13.1",
     "normalize.css": "7.0.0",
     "numeral": "^2.0.6",
     "react": "15.6.1",
